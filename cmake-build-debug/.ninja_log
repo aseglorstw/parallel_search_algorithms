@@ -1,0 +1,6 @@
+# ninja log v5
+5	1080	1712699454796349407	CMakeFiles/hw.dir/src/bfs.cpp.o	93d5675c65cb7810
+683	1657	1712743840922028601	hw	7d76c5e5fe80f11
+3	683	1712743839950050573	CMakeFiles/hw.dir/src/iddfs_weighted.cpp.o	cec8b5ba40d6e98
+4	1922	1712743196565941628	CMakeFiles/hw.dir/src/main.cpp.o	69b5397e365e3517
+5	692	1712741086893948078	CMakeFiles/hw.dir/src/iddfs.cpp.o	fea752c6e8cb1ec0
