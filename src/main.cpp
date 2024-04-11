@@ -54,38 +54,18 @@ void evaluate(state_ptr& root, search_fn search) {
 
 
 int main() {
-    // Vytvoreni instance hanojskych vezi s 3 koliky, 1 vezi (umistenou na
-    // prvnim koliku a 4 kotouci ve vezi.
     //auto d = hanoi::domain<2, 1, 2>();
 
-    // Vytvorit domenu "splnovani booleovskych funkci" muzete vytvorit nasledovne:
     auto d = sat::domain<20, 7, 3, 1, false>();
-    // Tato domena pak ma:
-    //   - 30 booleovskych promennych
-    //   - 7 termu (ktere jsou spojeny disjunkci)
-    //   - kazdy term obsahuje maximalne 3 literaly
-    //   - seed nahodneho generatoru je 1
-    //   - cena za prirazeni hodnoty jednomu literalu je uniformni (1)
-    //     (v pripade 'false' je cena za prirazeni hodnoty i-te promenne i)
 
-
-    // Vytvorit domenu sliding-puzzle hranou na hraci plose 4x4 (15-puzzle) muzete takto:
     //auto d = sliding_puzzle::domain<3, 10, 0>();
-    // Inicialni pozice je generovana provedenim 70 nahodnych tahu (nahodny
-    // generator je inicializovany seedem 0).
 
-    // Posledni domenou jsou bludiste. Bludiste o rozmerech 31x21 muzete vytvorit pomoci:
     //auto d = maze::domain<31, 21, 0, false>();
-    // Bludiste je generovano nahodne za pouziti seedu 0. V pripade, ze
-    // nastavite posledni parametr na 'true', cena za jeden pohyb v bludisti
-    // nebude uniformni.
-    //
-    // POZOR! Rozmery bludiste musi byt licha cisla!
 
     auto root = d.get_root();
 
-    //evaluate(root, bfs);
-    //evaluate(root, iddfs);
+    evaluate(root, bfs);
+    evaluate(root, iddfs);
     evaluate(root, iddfs_weighted);
 
     return 0;
