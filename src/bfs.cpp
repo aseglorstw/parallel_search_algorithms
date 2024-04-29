@@ -18,9 +18,8 @@ state_ptr get_best_result_bfs(std::vector<state_ptr> results) {
 state_ptr bfs(state_ptr root) {
     std::unordered_set<size_t> visited;
     visited.insert(root->get_identifier());
-    std::vector<state_ptr> main_vector;
+    std::vector<state_ptr> main_vector; main_vector.push_back(root);
     std::vector<state_ptr> secondary_vector;
-    main_vector.push_back(root);
     std::vector<state_ptr> results;
     #pragma omp parallel
     {
@@ -31,6 +30,7 @@ state_ptr bfs(state_ptr root) {
                 std::vector<state_ptr> local_secondary_vector;
                 auto current_node = main_vector[i];
                 for (auto neighbour_node: current_node->next_states()) {
+
                     if (visited.find(neighbour_node->get_identifier()) == visited.end()) {
                         #pragma omp critical
                         {

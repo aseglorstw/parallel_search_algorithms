@@ -15,4 +15,4 @@ set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
 find_package(OpenMP REQUIRED)
 link_libraries(OpenMP::OpenMP_CXX)
 
-add_executable(hw "src/main.cpp" "src/bfs.cpp" "src/iddfs.cpp" "src/iddfs_weighted.cpp")
+add_executable(hw "src/main.cpp" "src/bfs.cpp" "src/iddfs.cpp")
