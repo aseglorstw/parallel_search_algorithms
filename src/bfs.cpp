@@ -31,7 +31,7 @@ void add_to_visited(std::unordered_set<size_t>& visited, size_t id) {
     }
 }
 
-void add_to_results(std::vector<state_ptr> results, state_ptr neighbour_node) {
+void add_to_results(std::vector<state_ptr>& results, state_ptr neighbour_node) {
     #pragma omp critical
     {
         results.push_back(neighbour_node);
@@ -56,12 +56,7 @@ state_ptr bfs(state_ptr root) {
                     if (!is_visited(visited, neighbour_node->get_identifier())) {
                         add_to_visited(visited, neighbour_node->get_identifier());
                         local_secondary_vector.push_back(neighbour_node);
-                        if(neighbour_node->is_goal()) {
-                            #pragma omp critical
-                            {
-                                results.push_back(neighbour_node);
-                            }
-                        }
+                        if(neighbour_node->is_goal()) { add_to_results(results, neighbour_node);}
                     }
                 }
                 #pragma omp critical
