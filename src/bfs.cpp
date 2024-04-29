@@ -5,12 +5,12 @@
 #include <omp.h>
 
 bool is_visited(std::unordered_set<size_t>& visited, size_t id) {
-    bool found;
+    bool is_visited;
     #pragma omp critical(visited_section)
     {
-        found = (visited.find(id) != visited.end());
+        is_visited = (visited.find(id) != visited.end());
     }
-    return found;
+    return is_visited;
 }
 
 void add_to_visited(std::unordered_set<size_t>& visited, size_t id) {
