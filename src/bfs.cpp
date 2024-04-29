@@ -15,6 +15,29 @@ state_ptr get_best_result_bfs(std::vector<state_ptr> results) {
     return best_result;
 }
 
+bool is_visited(std::unordered_set<size_t>& visited, size_t id) {
+    bool found;
+    #pragma omp critical(visited_section)
+    {
+        found = (visited.find(id) != visited.end());
+    }
+    return found;
+}
+
+void add_to_visited(std::unordered_set<size_t>& visited, size_t id) {
+    #pragma omp critical(visited_section)
+    {
+        visited.insert(id);
+    }
+}
+
+void add_to_results(std::vector<state_ptr> results, state_ptr neighbour_node) {
+    #pragma omp critical
+    {
+        results.push_back(neighbour_node);
+    }
+}
+
 state_ptr bfs(state_ptr root) {
     std::unordered_set<size_t> visited;
     visited.insert(root->get_identifier());
@@ -30,18 +53,14 @@ state_ptr bfs(state_ptr root) {
                 std::vector<state_ptr> local_secondary_vector;
                 auto current_node = main_vector[i];
                 for (auto neighbour_node: current_node->next_states()) {
-
-                    if (visited.find(neighbour_node->get_identifier()) == visited.end()) {
-                        #pragma omp critical
-                        {
-                            if (visited.find(neighbour_node->get_identifier()) == visited.end()) {
-                                visited.insert(neighbour_node->get_identifier());
-                                local_secondary_vector.push_back(neighbour_node);
-                            }
-                        }
+                    if (!is_visited(visited, neighbour_node->get_identifier())) {
+                        add_to_visited(visited, neighbour_node->get_identifier());
+                        local_secondary_vector.push_back(neighbour_node);
                         if(neighbour_node->is_goal()) {
                             #pragma omp critical
-                            results.push_back(neighbour_node);
+                            {
+                                results.push_back(neighbour_node);
+                            }
                         }
                     }
                 }

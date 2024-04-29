@@ -51,13 +51,13 @@ void evaluate(state_ptr& root, search_fn search) {
 
 
 int main() {
-    //auto d = hanoi::domain<2, 1, 2>();
+    //auto d = hanoi::domain<2, 1, 0>();
 
     //auto d = sat::domain<20, 7, 3, 1, false>();
 
     //auto d = sliding_puzzle::domain<3, 10, 0>();
 
-    auto d = maze::domain<31, 21, 0, false>();
+   auto d = maze::domain<31, 21, 0, false>();
 
     auto root = d.get_root();
 
