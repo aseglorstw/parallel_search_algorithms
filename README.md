@@ -15,7 +15,7 @@ The DFS algorithm gradually increases the depth of exploration until the desired
 * However, if the depth becomes significant, further parallelization is avoided.
 
 <p align="center">
-  <img src="https://ltdfoto.ru/images/2024/04/29/BFS-and-DFS-Algorithms.png">
+  <img src="https://www.freelancinggig.com/blog/wp-content/uploads/2019/02/BFS-and-DFS-Algorithms.png">
 </p>
 
 
